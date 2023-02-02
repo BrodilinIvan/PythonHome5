@@ -23,3 +23,40 @@
 Вы вместо трехзначного числа ввели строку (((. Исправьтесь
 Введите операцию (+, -, *, / или 0 для выхода):
 """
+
+
+def func_calc_recursion():
+    lst = ['+', '-', '*', '/', '0']
+    i = input('Введите операцию (+, -, *, / или 0 для выхода): ')
+    if i not in lst:
+        print('Ошибка вводы операции! Повторите ввод!')
+        func_calc_recursion()
+    elif i == '0':
+        print('Вы вышли и программы!')
+        return
+    else:
+        try:
+            try:
+                a = float(input('Введите первое число: '))
+                b = float(input('Введите второе число: '))
+            except ValueError:
+                print('Некорректное значение! Повторите ввод!')
+                func_calc_recursion()
+            if i == '+':
+                print(a + b)
+                func_calc_recursion()
+            if i == '-':
+                print(a - b)
+                func_calc_recursion()
+            if i == '*':
+                print(a * b)
+                func_calc_recursion()
+            if i == '/':
+                print(f'{(a / b):0.2f}')
+                func_calc_recursion()
+        except ZeroDivisionError:
+            print('Вы что? Пытаетесь делить на 0! Повторите ввод!')
+            func_calc_recursion()
+
+
+func_calc_recursion()
