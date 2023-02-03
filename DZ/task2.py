@@ -16,36 +16,37 @@
 """
 
 
-def func_count():
+def func_count(honest=0, odd=0, num=0):
     """
-Функция func_count запрашивает число у пользователя. Проверяет его на
-корректность ввода и присваевает его пременной num. Далее передает в другую
-функцию func_count_lever(honest, odd, num) с входящими значениями, где
-переменные honest и odd являются счетчиками для четных и нечетных чисел.
-Функция func_count_lever выполняет подсчет содержащихся чисел в переменной num,
-после чего выводит результат.
+    Функция func_count запрашивает число у пользователя. Проверяет его на
+    корректность ввода и присваевает его пременной num. Переменные honest и odd
+    являются счетчиками для четных и нечетных чисел. Функция func_count
+    выполняет подсчет содержащихся чисел в переменной num, после чего выводит
+    результат.
     """
-    try:
-        num = int(input('Введите натуральное число: '))
-    except ValueError:
-        print('Введено некорректное значение! Повторите Ввод!')
-        func_count()
-    if num < 1:
-        print('Введено некорректное значение! Повторите Ввод!')
-        func_count()
+    if num == 0:
+        try:
+            num = int(input('Введите натуральное число: '))
+        except ValueError:
+            print('Введено некорректное значение! Повторите Ввод!')
+            func_count(honest=0, odd=0, num=0)
+        if num < 1:
+            print('Введено некорректное значение! Повторите Ввод!')
+            func_count(honest=0, odd=0, num=0)
+        else:
+            func_count(honest, odd, num)
     else:
-        def func_count_lever(honest, odd, num):
-            rezult = num % 10
-            if rezult % 2 == 0:
-                honest += 1
-            else:
-                odd += 1
-            num = num // 10
-            if num == 0:
-                return print(f'В данном числе \nчетных чисел: {honest} \n'
-                             f'нечетных чисел: {odd}')
-            else:
-                func_count_lever(honest, odd, num)
-        func_count_lever(honest=0, odd=0, num=num)
+        rezult = num % 10
+        if rezult % 2 == 0:
+            honest += 1
+        else:
+            odd += 1
+        num = num // 10
+        if num == 0:
+            return print(f'В данном числе \nчетных чисел: {honest} \n'
+                         f'нечетных чисел: {odd}')
+        else:
+            func_count(honest, odd, num)
+
 
 func_count()
