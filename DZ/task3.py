@@ -16,29 +16,28 @@
 """
 
 
-def func_revers():
+def func_revers(num_revers=0, len_num=0, num=0):
     """
     Функция func_revers принимает число от пользователя и проверяет его на
     корректность ввода, далее вычисляет длинну числа  через обращение в строку,
-    чтобы в дальнейшем вернуть нули, потому что при повороте они пропадают.
-    Сформированные данные передаем в функцию func_revers_level, где производим
-    реверс введенного числа, где соблюдаем условие выхода из рекурсии при
-    извлечении всех цифр. При помощи {num_revers:0{len_num}} сделаем длинну
-    обратного числа равной длинне заданного, вернув нули туда, от куда они
-    пропали.
+    чтобы в дальнейшем вернуть нули, потому что при развороте они пропадают.
+    Далее производится реверс введенного числа, где соблюдаем условие выхода из
+    рекурсии при извлечении всех цифр. При помощи {num_revers:0{len_num}}
+    сделаем длинну обратного числа равной длинне заданного, вернув нули туда,
+    от куда они пропали.
     """
-    num_revers = 0
-    try:
-        num = int(input('Введите натуральное число: '))
-    except ValueError:
-        print('Введено некорректное значение! Повторите Ввод!')
-        func_revers()
-    if num < 0:
-        print('Введено отрицательное значение! Повторите Ввод!')
-        func_revers()
-    len_num = len(str(num))
-
-    def func_revers_level(len_num, num_revers, num):
+    if num == 0:
+        try:
+            num = int(input('Введите натуральное число: '))
+        except ValueError:
+            print('Введено некорректное значение! Повторите Ввод!')
+            func_revers(num_revers=0, len_num=0, num=0)
+        if num < 0:
+            print('Введено отрицательное значение! Повторите Ввод!')
+            func_revers(num_revers=0, len_num=0, num=0)
+        len_num = len(str(num))
+        func_revers(num_revers=0, len_num=len_num, num=num)
+    else:
         temp = num % 10
         num_revers = num_revers * 10 + temp
         num //= 10
@@ -46,9 +45,7 @@ def func_revers():
             print(f'Перевернутое число: {num_revers:0{len_num}}')
             return
         else:
-            func_revers_level(len_num, num_revers, num)
-
-    func_revers_level(len_num, num_revers, num)
+            func_revers(num_revers, len_num, num)
 
 
 func_revers()
